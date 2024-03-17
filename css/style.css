@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif, Arial;
+  background-image: url("https://oliveira2022.jumpingcrab.com/imagens/chobits.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+#flex-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+#atuais,
+#sugerese {
+  flex: 0 0 20%;
+}
+
+.tocando1,
+.tocando4,
+.tocando3,
+.tocando2 {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  max-height: 100px;
+  max-width: 80px; 
+  overflow: auto;
+  background-color: rgb(74, 52, 174);
+  justify-content: center;
+  border-radius: 10%;
+}
+
+.msg,
+.msg2 {
+  color: black;
+  font-family: Arial, sans-serif;
+}
+
+.msg2 {
+  color: rgb(196, 24, 101);
+}
+
+/* header section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 15px;
+}
+
+main {
+  height: calc(100vh - 70px);
+  display: flex;
+  background-color: #f9f9f9;
+}
+
+#video-container {
+  flex: 0 0 calc(65% - 2%);
+  height: calc(100% - 20px); /* Ajustando a altura do contêiner */
+  position: relative;
+  color: #fff;
+  border-radius: 40%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+#video-container video {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%; /* Alterando a altura para preencher o contêiner */
+  object-fit: cover;
+  border-radius: 10%;
+}

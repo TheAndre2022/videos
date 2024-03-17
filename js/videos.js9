@@ -1,0 +1,173 @@
+var meuVideo = document.getElementById('myVideo');
+var progressoSpan = document.getElementById('progresso');
+var chave = document.getElementById('logado');
+
+
+meuVideo.addEventListener('timeupdate', function() {
+    var progresso = (meuVideo.currentTime / meuVideo.duration) * 100;
+
+    // Verifica se progresso é NaN
+    if (isNaN(progresso)) {
+        progresso = 0;
+    }
+
+    // Atualiza o registro de andamento do vídeo a cada 10 segundos
+    if (Math.floor(meuVideo.currentTime) % 10 === 0) {
+        atualizarRegistroDeAndamento();
+    }
+});
+
+function atualizarRegistroDeAndamento() {
+    var playbackTime = Math.floor(meuVideo.currentTime);
+    
+    var url = 'https://oliveira2020.zanity.net/quevideoestatocando.php?chave=' + chave.value + '&playback_time=' + playbackTime;
+
+    // Faz a requisição usando XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // Exibe a mensagem do servidor
+       //     tocandoElement.textContent = 'Mensagens do Servidor: ' + xhr.responseText;
+
+            // A resposta do servidor inclui a lista de vídeos tocados
+            
+            var listaDeVideos = JSON.parse(xhr.responseText);
+            var tocandoElement = document.getElementById('tocando');
+            var tocand2Element = document.getElementById('tocando2');
+            var tocand3Element = document.getElementById('tocando3');
+            var tocand4Element = document.getElementById('tocando4');
+
+            tocandoElement.innerHTML = '<div id="videos">  <div> Vídeo: ' + listaDeVideos ['ouvindoagora'] ['0'] ['nome']
+            + '</div> <div>  album: <font color = red> ' + listaDeVideos ['ouvindoagora'] ['0'] ['album_name']
+            + '</font> artista: <font color = red> ' + listaDeVideos ['ouvindoagora'] ['0'] ['artista']
+            + '</div> <div> </font> Numero: <font color = red> ' +  listaDeVideos ['ouvindoagora'] ['0'] ['numero']
+            + '</font>  Unique_id: <font color = gray> ' +  listaDeVideos ['ouvindoagora'] ['0'] ['unique_id']
+            + '</font> </div> </div>'; 
+            
+            tocand2Element.innerHTML = '<div id="videos">  <div> Vídeo: ' + listaDeVideos ['ouvindoagora'] ['1'] ['nome']
+            + '</div> <div>  album: <font color = red> ' + listaDeVideos ['ouvindoagora'] ['1'] ['album_name']
+            + '</font> artista: <font color = red> ' + listaDeVideos ['ouvindoagora'] ['1'] ['artista']
+            + '</div> <div> </font> Numero: <font color = red> ' +  listaDeVideos ['ouvindoagora'] ['1'] ['numero']
+            + '</font>  Unique_id: <font color = purple> <a href="https://oliveira2022.jumpingcrab.com/videoplayer/videoplayer.php?myvideo=' +
+            listaDeVideos ['ouvindoagora'] ['1'] ['unique_id'] + '">' +   listaDeVideos ['ouvindoagora'] ['1'] ['unique_id'] + '</a>'
+            + '</font> </div> </div>'; 
+                 
+            tocand3Element.innerHTML = '<div id="videos">  <div> Vídeo: ' + listaDeVideos ['ouvindoagora'] ['2'] ['nome']
+            + '</div> <div>  album: <font color = red> ' + listaDeVideos ['ouvindoagora'] ['2'] ['album_name']
+            + '</font> artista: <font color = red> ' + listaDeVideos ['ouvindoagora'] ['2'] ['artista']
+            + '</div> <div> </font> Numero: <font color = red> ' +  listaDeVideos ['ouvindoagora'] ['2'] ['numero']
+            + '</font>  Unique_id: <font color = purple> <a href="https://oliveira2022.jumpingcrab.com/videoplayer/videoplayer.php?myvideo=' +
+            listaDeVideos ['ouvindoagora'] ['2'] ['unique_id'] + '">' +   listaDeVideos ['ouvindoagora'] ['2'] ['unique_id'] + '</a>'
+            + '</font> </div> </div>'; 
+                               
+            tocand4Element.innerHTML = '<div id="videos">  <div> Vídeo: ' + listaDeVideos ['ouvindoagora'] ['3'] ['nome']
+            + '</div> <div>  album: <font color = red> ' + listaDeVideos ['ouvindoagora'] ['3'] ['album_name']
+            + '</font> artista: <font color = red> ' + listaDeVideos ['ouvindoagora'] ['3'] ['artista']
+            + '</div> <div> </font> Numero: <font color = red> ' +  listaDeVideos ['ouvindoagora'] ['3'] ['numero']
+            + '</font>  Unique_id: <font color = purple> <a href="https://oliveira2022.jumpingcrab.com/videoplayer/videoplayer.php?myvideo=' +
+            listaDeVideos ['ouvindoagora'] ['3'] ['unique_id'] + '">' +   listaDeVideos ['ouvindoagora'] ['3'] ['unique_id'] + '</a>'
+            + '</font> </div> </div>'; 
+
+        } else {
+            console.error('Erro ao atualizar o registro de andamento do vídeo.');
+        }
+    };
+
+    xhr.onerror = function() {
+        console.error('Erro de rede ao atualizar o registro de andamento do vídeo.');
+    };
+
+    xhr.send();
+}
+
+//Aqui é outro script
+//
+        document.addEventListener("DOMContentLoaded", function () {
+            var video = document.getElementById("myVideo");
+            var videoSource = document.getElementById("videoSource");
+          //  video.removeAttribute("controls");  
+
+          function loadAndPlayVideo(videoNumber) {
+            var chave = document.getElementById('logado');
+            
+            // Desativa os controles do vídeo
+            video.removeAttribute("controls");
+        
+            // Carrega o próximo vídeo
+            videoSource.src = `https://oliveira2022.jumpingcrab.com/streaming/videos-to-play.php?video=${videoNumber}&chave=${chave.value}`;
+            video.load();
+        
+            // Define um evento para quando o vídeo estiver carregado
+            video.onloadeddata = function() {
+                // Ativa os controles do vídeo
+               // video.setAttribute("controls", "true");
+                
+                // Inicia a reprodução do vídeo
+                video.play();
+            };
+        }
+        
+
+            video.addEventListener("ended", function () {
+    // Quando um vídeo termina, avança para o próximo
+    console.log('Let s play another video?'); 
+    var currentVideoNumber = parseInt(videoSource.src.match(/video=(\d+)/)[1]);
+    var nextVideoNumber = currentVideoNumber + 1;
+
+    if (nextVideoNumber <= 47000) {
+        loadAndPlayVideo(nextVideoNumber);
+    } else {
+        // Se ultrapassar o limite, voltar para o vídeo inicial
+        nextVideoNumber = 1; 
+        loadAndPlayVideo(nextVideoNumber);
+     
+    }
+ } );
+
+
+            video.addEventListener("timeupdate", function () {
+                // Salva o ponto de reprodução atual no localStorage
+                if (typeof (Storage) !== "undefined") {
+                    localStorage.setItem("videoTime", video.currentTime);
+                }
+            });
+
+            // Verifica se há um ponto de reprodução salvo e o define
+            if (typeof (Storage) !== "undefined" && localStorage.getItem("videoTime")) {
+                video.currentTime = localStorage.getItem("videoTime");
+            }
+
+            // Adiciona event listener para teclas
+            document.addEventListener("keydown", function (event) {
+                switch (event.key) {
+                    case "ArrowRight":
+                        // Tecla para a próxima música
+                        var nextVideoNumber = parseInt(videoSource.src.match(/video=(\d+)/)[1]) + 1;
+                        if (nextVideoNumber <= 70000) {
+                            loadAndPlayVideo(nextVideoNumber);
+                        }
+                        break;
+
+                    case "ArrowLeft":
+                        // Tecla para a música anterior
+                        var prevVideoNumber = parseInt(videoSource.src.match(/video=(\d+)/)[1]) - 1;
+                        if (prevVideoNumber >= 1) {
+                            loadAndPlayVideo(prevVideoNumber);
+                        }
+                        break;
+
+                    case "Home":
+                        // Tecla para selecionar uma música específica (você pode ajustar conforme necessário)
+                        var selectedVideoNumber = prompt("Digite o número da música desejada:");
+                        if (selectedVideoNumber && !isNaN(selectedVideoNumber) && selectedVideoNumber >= 1 && selectedVideoNumber <= 70000) {
+                            loadAndPlayVideo(parseInt(selectedVideoNumber));
+                        }
+                        break;
+
+                    // Adicione outros casos conforme necessário
+                }
+            });
+        });
+ 
